@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Spark Satellite Weather</string>
+
+    <string name="status_refresh">Refresh</string>
+    <string name="connectivity_good">Status: Good data</string>
+    <string name="connectivity_low">Status: Low data</string>
+    <string name="connectivity_none">Status: No data</string>
+
+    <string name="place_current_location">Current location</string>
+    <string name="no_location_found">No location found</string>
+    <string name="error_unable_load_weather">Unable to load weather</string>
+
+    <string name="rain_map_title">Today Rain Map</string>
+    <string name="rain_map_older">Older</string>
+    <string name="rain_map_newer">Newer</string>
+    <string name="rain_map_attribution">Radar · RainViewer</string>
+    <string name="rain_placeholder_need_location">Location needed for rain map. Fix location and tap Refresh.</string>
+    <string name="rain_placeholder_offline">No network. Weather will update when connected.</string>
+    <string name="rain_placeholder_low_data">Rain map available when status is Good data.</string>
+
+    <string name="location_prompt_settings">Location access was denied or unavailable. Open Settings to allow location, then tap Refresh.</string>
+    <string name="open_settings">Open Settings</string>
+</resources>

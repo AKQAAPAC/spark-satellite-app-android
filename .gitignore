@@ -1,0 +1,76 @@
+# Built application files
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+release/
+
+# Gradle (anywhere in repo)
+.gradle/
+**/.gradle/
+build/
+**/build/
+
+# Local configuration file (sdk path, etc.)
+local.properties
+
+# Android Studio / IntelliJ (anywhere in repo)
+.idea/
+**/.idea/
+*.iml
+*.ipr
+*.iws
+
+# Keystore files (never commit signing keys)
+*.jks
+*.keystore
+
+# External native build folder
+.externalNativeBuild/
+.cxx/
+
+# Android Studio captures
+captures/
+*.hprof
+
+# Kotlin
+*.kotlin_module
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs and temp
+*.log
+*.tmp
+*.temp
+*.swp
+*~
+
+# NDK
+obj/
+
+# Version control
+*.orig
+*.rej
+
+# Test / tooling
+coverage/
+.cache/

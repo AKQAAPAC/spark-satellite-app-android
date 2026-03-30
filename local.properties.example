@@ -1,0 +1,6 @@
+# Copy this file to local.properties and set your values.
+# local.properties is gitignored and not committed.
+
+# Required for the rain map (Google Maps). Get a key from Google Cloud Console
+# with "Maps SDK for Android" enabled. Free tier / limited usage is fine.
+MAPS_API_KEY=your_api_key_here
