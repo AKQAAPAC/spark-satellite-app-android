@@ -1,6 +1,6 @@
 # Spark Satellite Weather (Android)
 
-[![Kotlin](https://img.shields.io/badge/Kotlin-2.0-blue.svg)](https://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.4-blue.svg)](https://kotlinlang.org)
 [![Android](https://img.shields.io/badge/Android-26%2B-green.svg)](https://developer.android.com)
 [![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-BOM-brightgreen.svg)](https://developer.android.com/jetpack/compose)
 
@@ -35,8 +35,8 @@ Spark Satellite Weather is a **weather demo app**: it shows current conditions, 
 
 ## Requirements
 
-- **Android Studio** — Hedgehog or newer recommended.
-- **minSdk 26**, **targetSdk 35**.
+- **Android Studio** — **Quail 4 (2026.1.4)+** recommended for AGP **9.4** / `compileSdk` **37**. Older Studio versions may refuse to sync; use the [`v1.0.0`](https://github.com/AKQAAPAC/spark-satellite-app-android/releases/tag/v1.0.0) release for the previous toolchain.
+- **minSdk 26**, **targetSdk 36**, **compileSdk 37**.
 - **Location permission** — For weather and rain map.
 - **Google Maps API key** (rain map only): Create a key in [Google Cloud Console](https://console.cloud.google.com/) with **Maps SDK for Android** enabled. Add to the project root’s `local.properties`: `MAPS_API_KEY=your_api_key_here`. Copy `local.properties.example` to `local.properties` if needed.
 
@@ -53,7 +53,7 @@ Spark Satellite Weather is a **weather demo app**: it shows current conditions, 
 
 ## Documentation
 
-- **[docs/SATELLITE.md](docs/SATELLITE.md)** — What “satellite” means here, how to see it in the demo, how connectivity and location are implemented (status bar, rain map gating), and how to build an app with satellite behaviour (see the "Building an app with satellite" section in that doc).
+- **[docs/SATELLITE.md](docs/SATELLITE.md)** — Satellite / connection-aware behaviour, testing overrides, and **how to use the same pattern on older vs newer Android versions** (API 26 through 37+).
 
 ## Project structure (connectivity and location)
 
