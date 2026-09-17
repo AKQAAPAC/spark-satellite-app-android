@@ -31,10 +31,11 @@ import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -54,7 +55,7 @@ import com.akqa.sparksatelliteweather.ui.theme.OnBackgroundVariant
 import com.akqa.sparksatelliteweather.ui.theme.SurfaceVariant
 import com.akqa.sparksatelliteweather.ui.theme.SurfaceVariant2
 import androidx.compose.ui.layout.ContentScale
-import coil.compose.AsyncImage
+import coil3.compose.AsyncImage
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -408,7 +409,12 @@ private fun RainMapSection(
                     Text(stringResource(R.string.rain_map_newer), color = OnBackgroundVariant, fontSize = 10.sp)
                 }
                 val time = radarFrames.getOrNull(selectedIndex)?.time
-                val timeStr = time?.let { java.text.SimpleDateFormat("HH:mm", java.util.Locale.getDefault()).format(java.util.Date(it * 1000)) }
+                val locale = LocalConfiguration.current.locales[0]
+                val timeStr = remember(time, locale) {
+                    time?.let {
+                        java.text.SimpleDateFormat("HH:mm", locale).format(java.util.Date(it * 1000))
+                    }
+                }
                 val radarAttribution = stringResource(R.string.rain_map_attribution)
                 Text(
                     text = buildString {

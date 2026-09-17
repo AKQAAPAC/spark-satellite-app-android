@@ -28,6 +28,26 @@ The status bar shows a single line: **Status: Good data** / **Status: Low data**
 
 So **TRANSPORT_SATELLITE** is what drives **Low** (and therefore **"Status: Low data"**) on real hardware; use the override for testing without satellite.
 
+### Older vs newer Android versions (for app developers)
+
+Use the same **Good / Low / None** product model on all versions. Gate APIs by SDK level so one codebase covers old and new devices.
+
+| Android / API | What you can rely on | What to do in your app |
+|---------------|----------------------|-------------------------|
+| **API 26–30** (this app’s minSdk up to pre‑12) | No public satellite transport in normal app networking | Treat connectivity as **Good** (Wi‑Fi / Ethernet / cellular) or **None**. Do not expect real satellite Low. Use a **test override** in demos. |
+| **API 31–34** | Satellite transport may appear on some OEM/extension builds; constant availability varies | Keep a version check before reading satellite transport (this app uses `Build.VERSION_CODES.S`). Prefer the numeric transport id `10` only if you must support older compile SDKs—prefer the SDK constant when `compileSdk` is high enough. |
+| **API 35+ (Android 15)** | `TRANSPORT_SATELLITE` is the supported ConnectivityManager signal; constrained satellite opt‑in is documented | Opt in with `PROPERTY_SATELLITE_DATA_OPTIMIZED`. Detect Low with `TRANSPORT_SATELLITE` (and optionally `!NET_CAPABILITY_NOT_BANDWIDTH_CONSTRAINED` per Google’s [constrained satellite guide](https://developer.android.com/develop/connectivity/satellite/constrained-networks)). Use a `NetworkRequest` that **removes** `NOT_BANDWIDTH_CONSTRAINED` if you need callbacks for constrained nets. |
+| **API 36–37+** | Same connectivity model; NTN signal APIs appear on telephony (`NtnSignalStrength`, carrier‑roaming NTN listeners) | Optional: show signal quality **in addition to** Good/Low/None. Do **not** replace ConnectivityManager transport checks with NTN signal alone—signal APIs are carrier/telephony‑oriented and not the primary “adapt bandwidth” switch. |
+
+**Practical pattern (matches this demo):**
+
+1. Always classify Wi‑Fi / Ethernet / cellular as **Good** and no network as **None**.
+2. On API levels where satellite transport is available, classify validated satellite as **Low** and gate heavy features (maps, video, large downloads).
+3. Always ship the manifest opt‑in if you want HTTPS traffic on constrained satellite when that is the only network.
+4. Keep an **adb / intent override** so QA can exercise Low without satellite hardware on any API level.
+
+**This app today:** `minSdk 26`, `targetSdk 36`, `compileSdk 37`. Detection uses `TRANSPORT_SATELLITE` with an API 31+ guard; constrained capability detection is documented as an optional alignment with Google’s sample, not required for the demo’s Good/Low/None UX.
+
 ### 2. Observing connectivity — `WeatherViewModel.kt`
 
 - The ViewModel receives a **`ConnectivityManager`** and subscribes to **`connectivityManager.connectivityFlow(context)`** in `init`, updating **`state.connectivity`** on each emission.
@@ -45,7 +65,7 @@ So **TRANSPORT_SATELLITE** is what drives **Low** (and therefore **"Status: Low 
 
 | Concept | In this app |
 |--------|----------------|
-| **What triggers Low data mode** | TRANSPORT_SATELLITE (API 31+) on the active network; or testing override `connectivity_override`. |
+| **What triggers Low data mode** | TRANSPORT_SATELLITE (API 31+ guard in code; public ConnectivityManager constant from API 35+) on the active network; or testing override `connectivity_override`. |
 | **Where it’s computed** | `Connectivity.kt`: `currentConnectivity()` and `connectivityFlow()`. |
 | **Where it’s stored** | `WeatherViewModel`: `state.connectivity` updated from the flow. |
 | **Where it’s shown** | `ContentView.kt`: StatusBar shows `strings.xml` status lines + last successful fetch time. |
@@ -61,7 +81,7 @@ For the exact code, see **`Connectivity.kt`**, **`WeatherViewModel.kt`** (init a
 
 If you want to add similar behaviour to your own app:
 
-1. **Observe connectivity** — Use `ConnectivityManager.registerDefaultNetworkCallback` and `NetworkCapabilities`. Treat `TRANSPORT_SATELLITE` (API 31+) as a “low” or constrained state; Wi‑Fi, Ethernet, and cellular as “good”; no network as “none”. See **`Connectivity.kt`** for the flow and override handling.
+1. **Observe connectivity** — Use `ConnectivityManager.registerDefaultNetworkCallback` (or a constrained-aware `NetworkRequest` + `registerBestMatchingNetworkCallback` on newer APIs) and `NetworkCapabilities`. Treat `TRANSPORT_SATELLITE` as a “low” or constrained state when available; Wi‑Fi, Ethernet, and cellular as “good”; no network as “none”. See **`Connectivity.kt`** and the **Older vs newer Android versions** section above.
 2. **Opt in to constrained satellite data (so HTTPS works on satellite)** — Under `<application>` in **`AndroidManifest.xml`**, add:
 
    ```xml
