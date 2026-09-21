@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - Spark design system
+
+- Apply Spark Generative Commerce tokens (color, spacing, radius, type) across the weather UI.
+- Dark canvas with plan-style cards, cyan Refresh, and shared selected-day / Now highlight.
+- Light theme with white background; sun/moon pill toggles light/dark (persisted).
+- Low–high temperature ranges, hour pills with precip + wind on separate lines; rain map slider and footer aligned with iOS / React Native.
+- README screenshots for light and dark Spark themes.
+
 ## [1.1.0] - Toolchain upgrade
 
 - Toolchain upgrade: AGP 9.4, Gradle 9.7.1, Kotlin 2.4, Compose BOM 2026.08, compileSdk 37 / targetSdk 36.

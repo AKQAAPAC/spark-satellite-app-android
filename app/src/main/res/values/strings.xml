@@ -21,4 +21,7 @@
 
     <string name="location_prompt_settings">Location access was denied or unavailable. Open Settings to allow location, then tap Refresh.</string>
     <string name="open_settings">Open Settings</string>
+
+    <string name="theme_light">Light theme</string>
+    <string name="theme_dark">Dark theme</string>
 </resources>
