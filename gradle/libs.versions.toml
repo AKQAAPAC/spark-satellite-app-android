@@ -1,20 +1,20 @@
 [versions]
-agp = "9.0.1"
-kotlin = "2.2.10"
-coreKtx = "1.16.0"
+agp = "9.4.0"
+kotlin = "2.4.20"
+coreKtx = "1.19.0"
 junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
-lifecycle = "2.8.6"
-activityCompose = "1.10.1"
-composeBom = "2024.04.01"
-retrofit = "2.11.0"
-okhttp = "4.12.0"
-kotlinxSerialization = "1.8.0"
-coil = "2.5.0"
-location = "21.3.0"
-play-services-maps = "19.0.0"
-maps-compose = "4.4.0"
+junitVersion = "1.3.0"
+espressoCore = "3.7.0"
+lifecycle = "2.11.0"
+activityCompose = "1.13.0"
+composeBom = "2026.08.00"
+retrofit = "3.0.0"
+okhttp = "5.4.0"
+kotlinxSerialization = "1.11.0"
+coil = "3.5.0"
+location = "21.4.0"
+play-services-maps = "20.0.0"
+maps-compose = "8.6.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,7 +40,8 @@ retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 
 org-jetbrains-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
-coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
 
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "location" }
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "play-services-maps" }

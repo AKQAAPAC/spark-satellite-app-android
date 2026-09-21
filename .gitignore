@@ -22,6 +22,10 @@ release/
 build/
 **/build/
 
+# Kotlin build cache (Gradle 8+ / K2)
+.kotlin/
+**/.kotlin/
+
 # Local configuration file (sdk path, etc.)
 local.properties
 
