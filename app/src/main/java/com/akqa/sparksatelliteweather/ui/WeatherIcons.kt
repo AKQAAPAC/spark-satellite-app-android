@@ -1,14 +1,19 @@
 package com.akqa.sparksatelliteweather.ui
 
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.PlatformTextStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.akqa.sparksatelliteweather.R
@@ -56,12 +61,23 @@ fun IoniconsWeatherIcon(
     color: Color
 ) {
     val density = LocalDensity.current
-    val fontSize = with(density) { size.toSp() }
-    Text(
-        text = String(Character.toChars(ioniconsCodepointForCode(code))),
-        fontFamily = FontFamily(Font(R.font.ionicons, FontWeight.Normal)),
-        fontSize = fontSize,
-        color = color,
-        modifier = modifier.then(Modifier.size(size))
-    )
+    val fontSize = with(density) { (size * 0.9f).toSp() }
+    Box(
+        modifier = modifier.defaultMinSize(minWidth = size, minHeight = size),
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(
+            text = String(Character.toChars(ioniconsCodepointForCode(code))),
+            fontFamily = FontFamily(Font(R.font.ionicons, FontWeight.Normal)),
+            fontSize = fontSize,
+            color = color,
+            textAlign = TextAlign.Center,
+            maxLines = 1,
+            softWrap = false,
+            style = TextStyle(
+                platformStyle = PlatformTextStyle(includeFontPadding = false),
+                lineHeight = fontSize,
+            ),
+        )
+    }
 }

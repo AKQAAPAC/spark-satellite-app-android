@@ -8,6 +8,7 @@ Spark Satellite Weather is a **weather demo app**: it shows current conditions, 
 
 ## Table of contents
 
+- [Screenshots](#screenshots)
 - [How to use the app](#how-to-use-the-app)
 - [Satellite connectivity in development and testing](#satellite-connectivity-in-development-and-testing)
 - [Requirements](#requirements)
@@ -17,6 +18,16 @@ Spark Satellite Weather is a **weather demo app**: it shows current conditions, 
 - [Project structure (connectivity and location)](#project-structure-connectivity-and-location)
 - [License](#license)
 
+## Screenshots
+
+**Light and dark themes** — Spark appearance.
+
+<p align="center">
+  <img src="docs/screenshots/light-theme.png" alt="Light theme — home screen with forecast, hourly strip, and rain map" width="280">
+  &nbsp;
+  <img src="docs/screenshots/dark-theme.png" alt="Dark theme — home screen with forecast, hourly strip, and rain map" width="280">
+</p>
+
 ## How to use the app
 
 1. Run the app on an emulator or device (**Run** ▶).
@@ -24,6 +35,7 @@ Spark Satellite Weather is a **weather demo app**: it shows current conditions, 
 3. The app loads weather for the current location. Use **Refresh** to update after changing the device location.
 4. Select a day in the list to see that day’s details and the hourly strip.
 5. When connection is **Good**, the **rain map** (radar overlay) is available; use the Older–Newer slider to scrub through radar frames. When connection is Low or None, the rain map section shows a placeholder.
+6. Tap **sun** or **moon** in the bottom theme bar to switch between light and dark Spark themes.
 
 ## Satellite connectivity in development and testing
 
@@ -62,7 +74,8 @@ Spark Satellite Weather is a **weather demo app**: it shows current conditions, 
 | `Connectivity.kt` | Connectivity enum (Good/Low/None) and `connectivityFlow()`; `description` returns "Status: Good/Low/No data". See [docs/SATELLITE.md](docs/SATELLITE.md). |
 | `LocationHelper.kt` | Fused Location Provider and reverse geocoding; `getCurrentLocation(forceRefresh)` for initial load vs user Refresh. |
 | `WeatherViewModel.kt` | Subscribes to `connectivityFlow()`, keeps `state.connectivity`; loads weather and radar from location; only loads rain map when `Connectivity.Good`. |
-| `ui/ContentView.kt` | Status bar shows connectivity description (Status: Good/Low/No data); rain map only when Good. |
+| `ui/ContentView.kt` | Status bar, forecast, rain map, and Spark theme toggle; rain map only when Good. |
+| `ui/theme/` | Spark Generative Commerce tokens (colors, spacing, radius, typography) and light/dark appearance. |
 
 Other modules (e.g. `data/`, `di/`) handle weather API and UI; see the source and [docs/SATELLITE.md](docs/SATELLITE.md) for the full flow.
 
